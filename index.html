@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-sketch</title>
+    <link rel="stylesheet" href ='styles.css'>
+</head>
+<body>
+    <button onclick= 'createNewGrid()'>Create New Grid</button>
+    <div id = container></div>
+    <script>
+        const container = document.getElementById('container');
+        const gridSize = 16;
+        
+        function createGrid(size){
+            container.innerHTML = '';
+
+        
+        container.style.setProperty('--grid-size', size);
+        for(let i= 0; i< size * size ;i++){
+        const gridSquare =document.createElement('div');
+        gridSquare.classList.add('grid-square');
+        gridSquare.addEventListener('mouseover', changeColor);
+        container.appendChild(gridSquare);
+    }
+}
+
+    function changeColor(event){
+        const randomColor = getRandomColor();
+        event.target.style.backgroundColor = randomColor;
+    }
+    function getRandomColor() {
+        const red = Math.floor(Math.random()* 256);
+        const green = Math.floor(Math.random()* 256);
+        const blue = Math.floor(Math.random()* 256);
+        return `rgb(${red},${green},${blue})`;
+    }
+
+    function createNewGrid(){
+        let newSize = prompt('Enter the number of squares per side (max 100):');
+        newSize = Math.min(Math.max(parseInt(newSize),1),100) ||16; // Ensure newSize is between 1 and 100
+        createGrid(newSize);
+    }
+
+
+
+
+  
+    </script>
+</body>
+</html>
